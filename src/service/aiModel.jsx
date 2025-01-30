@@ -12,7 +12,7 @@ const generateTripLocation = async (location, days, budget, travelGroup) => {
   }
 
   const data = await response.json();
-  return data.tripLocation;
+  return data; // Return the entire response data
 };
 
 export default generateTripLocation;

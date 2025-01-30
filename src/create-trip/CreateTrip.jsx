@@ -7,6 +7,7 @@ const CreateTrip = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [generatedLocation, setGeneratedLocation] = useState("");
+  const [hotelImages, setHotelImages] = useState([]); // Initialize as an empty array
 
   const formHandler = (name, value) => {
     if (name === 'days' && Number(value) < 5) {
@@ -32,8 +33,10 @@ const CreateTrip = () => {
 
     setLoading(true);
     try {
-      const tripLocation = await generateTripLocation(location, days, budget, travelGroup);
+      const { tripLocation, hotelImages } = await generateTripLocation(location, days, budget, travelGroup);
       setGeneratedLocation(tripLocation);
+      setHotelImages(hotelImages); // Set hotel images
+      console.log('Form submitted successfully:', { formData, tripLocation });
       alert('Form submitted successfully');
     } catch (error) {
       console.error("Error generating trip location:", error);
@@ -126,6 +129,23 @@ const CreateTrip = () => {
         <div className="mt-10">
           <h2 className="text-2xl font-bold">Generated Trip Location</h2>
           <p className="mt-3 text-gray-700 text-lg">{generatedLocation}</p>
+          <div className="mt-5">
+            <h3 className="text-xl font-bold">Form Data:</h3>
+            <p className="text-gray-700"><strong>Location:</strong> {formData.location}</p>
+            <p className="text-gray-700"><strong>Days:</strong> {formData.days}</p>
+            <p className="text-gray-700"><strong>Budget:</strong> {formData.budget}</p>
+            <p className="text-gray-700"><strong>Travel Group:</strong> {formData.travelGroup}</p>
+          </div>
+          {hotelImages && hotelImages.length > 0 && (
+            <div className="mt-5">
+              <h3 className="text-xl font-bold">Hotel Images:</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5">
+                {hotelImages.map((image, index) => (
+                  <img key={index} src={image} alt={`Hotel ${index + 1}`} className="w-full h-auto rounded-lg" />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
