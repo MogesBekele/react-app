@@ -33,8 +33,6 @@ const CreateTrip = () => {
       setGeneratedLocation(tripLocation);
       console.log('Form submitted successfully:', { formData, tripLocation });
       alert('Form submitted successfully');
-      // Redirect to register page after successful trip generation
-      navigate('/register');
     } catch (error) {
       console.error("Error generating trip location:", error);
       alert('Failed to generate trip location');
