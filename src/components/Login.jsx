@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -24,54 +23,58 @@ const Login = () => {
       setErrorMessage('Please fill in all fields');
       return;
     }
+
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', values);
-      const { token } = response.data;
-  
-      if (response.status === 200 && token) {
-        localStorage.setItem('token', token);  // Store token in localStorage
-        navigate('/');  // Redirect to home page
-      }
+      const response = await axios.post('/api/login', values);
+      navigate('/dashboard');
     } catch (error) {
-      console.log(error);
+      setErrorMessage('Invalid email or password');
     }
   };
+
   return (
-    <>
-      <div className="container">
-        <h4>Log In</h4>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h4 className="text-2xl font-bold mb-6 text-center">Login</h4>
+        {errorMessage && (
+          <div className="mb-4 text-red-500 text-center">
+            {errorMessage}
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>Email:</label>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">Email:</label>
             <input
               type="email"
               placeholder="Enter Your Email"
               name="email"
               onChange={changeHandler}
-              value={values.email}
-              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div>
-            <label>Password:</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">Password:</label>
             <input
-              type="password"  // Changed to password type for security
+              type="password"
               placeholder="Enter Your Password"
               name="password"
               onChange={changeHandler}
-              value={values.password}
-              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+          >
+            Login
+          </button>
         </form>
-        <div>
-          <span>Don't have Account?</span>
-          <Link to="/register">Sign Up</Link>
+        <div className="mt-6 text-center">
+          <span className="text-gray-600">Don't have an account? </span>
+          <Link to="/register" className="text-blue-500 hover:underline">Register</Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

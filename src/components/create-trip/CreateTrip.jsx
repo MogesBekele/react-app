@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { selectTravelOptions, selectBudgetOptions } from "../constant/options";
-import generateTripLocation from "../service/aiModel";
-import { Link } from "react-router-dom";
+import { selectTravelOptions, selectBudgetOptions } from "../../constant/options";
+import generateTripLocation from "../../service/aiModel";
+import { useNavigate } from "react-router-dom";
 
 const CreateTrip = () => {
   const [place, setPlace] = useState("");
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [generatedLocation, setGeneratedLocation] = useState("");
-  const [hotelImages, setHotelImages] = useState([]); // Initialize as an empty array
+  const navigate = useNavigate();
 
   const formHandler = (name, value) => {
     if (name === 'days' && Number(value) < 5) {
@@ -25,20 +25,16 @@ const CreateTrip = () => {
     console.log(formData);
   }, [formData]);
 
-  const handleSubmit = async () => {
-    const { days, budget, travelGroup, location } = formData;
-    if (!days || !budget || !travelGroup || !location) {
-      alert('Please fill all the fields');
-      return;
-    }
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
     try {
-      const { tripLocation, hotelImages } = await generateTripLocation(location, days, budget, travelGroup);
+      const { tripLocation } = await generateTripLocation(formData.location, formData.days, formData.budget, formData.travelGroup);
       setGeneratedLocation(tripLocation);
-      setHotelImages(hotelImages); // Set hotel images
       console.log('Form submitted successfully:', { formData, tripLocation });
       alert('Form submitted successfully');
+      // Redirect to register page after successful trip generation
+      navigate('/register');
     } catch (error) {
       console.error("Error generating trip location:", error);
       alert('Failed to generate trip location');
@@ -118,13 +114,13 @@ const CreateTrip = () => {
         </div>
       </div>
       <div className="mt-10 flex justify-center md:justify-end mb-10">
-        <Link to={'/register'}
+        <button
           className="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors"
           onClick={handleSubmit}
           disabled={loading}
         >
           {loading ? 'Generating...' : 'Generate Trip'}
-        </Link>
+        </button>
       </div>
       {generatedLocation && (
         <div className="mt-10">
@@ -137,16 +133,6 @@ const CreateTrip = () => {
             <p className="text-gray-700"><strong>Budget:</strong> {formData.budget}</p>
             <p className="text-gray-700"><strong>Travel Group:</strong> {formData.travelGroup}</p>
           </div>
-          {hotelImages && hotelImages.length > 0 && (
-            <div className="mt-5">
-              <h3 className="text-xl font-bold">Hotel Images:</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5">
-                {hotelImages.map((image, index) => (
-                  <img key={index} src={image} alt={`Hotel ${index + 1}`} className="w-full h-auto rounded-lg" />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       )}
     </div>
