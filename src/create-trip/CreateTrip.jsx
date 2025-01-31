@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { selectTravelOptions, selectBudgetOptions } from "../constant/options";
 import generateTripLocation from "../service/aiModel";
+import { Link } from "react-router-dom";
 
 const CreateTrip = () => {
   const [place, setPlace] = useState("");
@@ -117,13 +118,13 @@ const CreateTrip = () => {
         </div>
       </div>
       <div className="mt-10 flex justify-center md:justify-end mb-10">
-        <button
+        <Link to={'/register'}
           className="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors"
           onClick={handleSubmit}
           disabled={loading}
         >
           {loading ? 'Generating...' : 'Generate Trip'}
-        </button>
+        </Link>
       </div>
       {generatedLocation && (
         <div className="mt-10">
