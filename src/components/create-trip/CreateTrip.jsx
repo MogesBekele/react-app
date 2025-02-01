@@ -53,7 +53,7 @@ const CreateTrip = () => {
           <h2 className="text-xl font-bold">What is your destination of choice? 🌍</h2>
           <input
             type="text"
-            className="border-2 border-gray-300 w-full p-2 mt-2"
+            className="border-2 border-gray-300 w-full p-2 mt-2" placeholder="Enter a place"
             value={place}
             onChange={(e) => {
               setPlace(e.target.value);
