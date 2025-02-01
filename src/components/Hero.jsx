@@ -10,7 +10,7 @@ const Hero = () => {
       <h2 className="text-base md:text-lg mb-8 text-center animate-pulse">
         Personalized recommendations for your next trip
       </h2>
-      <Link to="/create-trip">
+      <Link to="/register">
         <button className="bg-gray-300 text-gray-900 px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors animate-fade-in">
           Get Started
         </button>
