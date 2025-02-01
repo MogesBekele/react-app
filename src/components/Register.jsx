@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [formField, setFormField] = useState({
@@ -6,6 +7,7 @@ const Register = () => {
     email: '',
     password: ''
   });
+  const navigate = useNavigate();
 
   const changeHandler = (e) => {
     setFormField({
@@ -18,6 +20,8 @@ const Register = () => {
     e.preventDefault();
     console.log('Form submitted:', formField);
     // Add your form submission logic here
+    navigate('/login');
+
   };
 
   return (
