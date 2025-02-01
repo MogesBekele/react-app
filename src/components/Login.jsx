@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [formData, setFormData] = useState({
+  const [formField, setFormField] = useState({
     email: '',
     password: ''
   });
   const navigate = useNavigate();
 
   const changeHandler = (e) => {
-    setFormData({
-      ...formData,
+    setFormField({
+      ...formField,
       [e.target.name]: e.target.value
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log('Form submitted:', formField);
     // Add your form submission logic here
     navigate('/create-trip');
   };

@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
+  const [formField, setFormField] = useState({
     userName: '',
     email: '',
     password: ''
   });
 
   const changeHandler = (e) => {
-    setFormData({
-      ...formData,
+    setFormField({
+      ...formField,
       [e.target.name]: e.target.value
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log('Form submitted:', formField);
     // Add your form submission logic here
   };
 
