@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import CreateTrip from "./components/create-trip/CreateTrip";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import ForgotPassword from "./components/ForgotPassword";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Hero />} />
         <Route path="/register" element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
         
         <Route path="/create-trip" element={<CreateTrip />} />
       </Routes>

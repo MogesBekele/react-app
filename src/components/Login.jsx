@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const navigate = useNavigate();
 
   const changeHandler = (e) => {
     setFormData({
@@ -18,6 +19,7 @@ const Login = () => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     // Add your form submission logic here
+    navigate('/create-trip');
   };
 
   return (
@@ -39,16 +41,15 @@ const Login = () => {
           <div className="mb-6">
             <label className="block text-gray-700 font-semibold mb-2">Password:</label>
             <input
-            
               type="password"
               placeholder="Enter Your Password"
               name="password"
               onChange={changeHandler}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              
+            
             />
           </div>
-          <button onClick={() => navigate('/create-trip')}
+          <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
           >

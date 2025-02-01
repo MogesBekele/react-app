@@ -33,6 +33,7 @@ const Register = () => {
               name="userName"
               onChange={changeHandler}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
           <div className="mb-4">
@@ -43,6 +44,7 @@ const Register = () => {
               name="email"
               onChange={changeHandler}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
           <div className="mb-6">
@@ -53,6 +55,7 @@ const Register = () => {
               name="password"
               onChange={changeHandler}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
           <button
