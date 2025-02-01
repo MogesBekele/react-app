@@ -6,6 +6,7 @@ import CreateTrip from "./components/create-trip/CreateTrip";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import ForgotPassword from "./components/ForgotPassword";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/create-trip" element={<CreateTrip />} />
       </Routes>
+      <Footer/>
     </div>
   );
 };
