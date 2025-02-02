@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    newPassword: ''
+  });
+
+  const changeHandler = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Forgot Password form submitted:', email);
+    console.log('Forgot Password form submitted:', formData);
     // Add your form submission logic here
   };
 
@@ -20,8 +30,20 @@ const ForgotPassword = () => {
               type="email"
               placeholder="Enter Your Email"
               name="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={changeHandler}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 font-semibold mb-2">New Password:</label>
+            <input
+              type="password"
+              placeholder="Enter Your New Password"
+              name="newPassword"
+              onChange={changeHandler}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
           <button
