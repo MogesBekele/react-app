@@ -8,14 +8,14 @@ const ForgotPassword = () => {
 
   const changeHandler = (e) => {
     setFormData({
-      ...formData,
+      ...formField,
       [e.target.name]: e.target.value
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Forgot Password form submitted:', formData);
+    console.log('Forgot Password form submitted:', formField);
     // Add your form submission logic here
   };
 
