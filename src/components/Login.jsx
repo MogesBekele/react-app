@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [formField, setFormField] = useState({
@@ -15,11 +16,26 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formField);
-    // Add your form submission logic here
-    navigate('/create-trip');
+  const handleSubmit = async(e) => {
+    e.preventDefault(); // Prevent default form submission
+    if (!formField.email || !formField.password) {
+      setErrorMessage('Please fill in all fields');
+      return;
+    }
+    try {
+      const response = await axios.post('http://localhost:3000/auth/login', formField);
+      const { token } = response.data;
+  
+      if (response.status === 200 && token) {
+        localStorage.setItem('token', token);  // Store token in localStorage
+        navigate('/create-trip');
+      } else {
+        setErrorMessage('Login failed. Please try again.');
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage('An error occurred. Please try again.');
+    }
   };
 
   return (

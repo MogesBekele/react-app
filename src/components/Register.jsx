@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
   const [formField, setFormField] = useState({
@@ -16,11 +17,20 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log('Form submitted:', formField);
-    // Add your form submission logic here
-    navigate('/login');
+    try {
+      const response = await axios.post('http://localhost:3000/auth/register', formField);
+  
+      if(response.status===201){
+        navigate('/login')
+      }
+      console.log(response)
+     } catch (error) {
+      console.log(error)
+      
+     }
+  
 
   };
 
